@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Noori Transportation Co.</title>
+    <meta name="description" content="Explore Noori Transportation Co. services: Mining Logistics, Coal Transportation, Hazardous Material Transport, Fuel Logistics, and Customized Solutions.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=1.2">
+    
+    <style>
+        /* Subpage-specific styling */
+        .subpage-hero {
+            position: relative;
+            height: 40vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: var(--primary);
+        }
+
+        .subpage-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .subpage-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .subpage-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            color: var(--white);
+        }
+
+        .subpage-hero-content h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-family: var(--font-heading);
+            font-weight: 800;
+        }
+
+        .breadcrumbs {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .breadcrumbs a {
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--red);
+        }
+
+        /* Services detail layout */
+        .services-detail-section {
+            padding: 6rem 0;
+        }
+
+        .service-row {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .service-row:nth-child(even) {
+            grid-template-columns: 1.2fr 1fr;
+        }
+
+        .service-row:nth-child(even) .service-img-wrapper {
+            order: 2;
+        }
+
+        .service-img-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            height: 380px;
+            border: 1px solid #E2E8F0;
+        }
+
+        .service-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-row:hover .service-img-wrapper img {
+            transform: scale(1.04);
+        }
+
+        .service-text-wrapper {
+            padding: 1rem 0;
+        }
+
+        .service-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .service-icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(185, 28, 28, 0.05);
+            color: var(--red);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .service-icon-box img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .service-row:hover .service-icon-box {
+            background-color: var(--red);
+            color: var(--white);
+        }
+
+        .service-text-wrapper h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-family: var(--font-heading);
+            margin-bottom: 1.2rem;
+        }
+
+        .service-text-wrapper p {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-banner-card {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 4rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            margin-top: 2rem;
+        }
+
+        .quote-banner-card h3 {
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .quote-banner-card p {
+            color: #CBD5E1;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        @media (max-width: 992px) {
+            .service-row, .service-row:nth-child(even) {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .service-row:nth-child(even) .service-img-wrapper {
+                order: 0;
+            }
+            .service-img-wrapper {
+                height: 280px;
+            }
+            .service-text-wrapper h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <span class="logo" id="siteLogo">Noori <span>Transportation Co.</span></span>
+                <span class="logo-tagline">3 Generations, 1 Business</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#home">Home</a>
+                <div class="dropdown">
+                    <a href="about.html" class="dropdown-trigger">About Us <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="about.html#profile">Company Profile</a>
+                        <a href="about.html#vision">Our Vision</a>
+                        <a href="about.html#values">What We Stand For</a>
+                        <a href="about.html#services">Our Services</a>
+                        <a href="about.html#contact">Get in Touch</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-trigger">Services <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-content" id="servicesDropdownMenu">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+                <a href="index.html#why-us">Why Us</a>
+                <a href="index.html#leadership">Leadership</a>
+                <a href="index.html#gallery">Gallery</a>
+                <a href="index.html#careers">Careers</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <a href="index.html#quote" class="btn btn-primary">Get Quote</a>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Subpage Hero -->
+    <section class="subpage-hero">
+        <div class="subpage-hero-bg">
+            <img src="https://loremflickr.com/1600/900/industrial,machinery" alt="Our Services">
+        </div>
+        <div class="subpage-hero-content container">
+            <h1>Industrial Services</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> &nbsp;/&nbsp; Services
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Detail Section -->
+    <section class="services-detail-section">
+        <div class="container" id="servicesListContainer">
+            <!-- Services rows loaded dynamically from localStorage -->
+        </div>
+
+        <div class="container">
+            <div class="quote-banner-card">
+                <h3>Request a Custom Logistics Pricing</h3>
+                <p>Have specialized weight, destination, or timeline logistics constraints? Consult with our logistics coordinators to frame a commercial contract.</p>
+                <a href="index.html#quote" class="btn btn-primary">Request Quotation <i class="fa-solid fa-file-invoice-dollar ml-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Company</h3>
+                <p>Noori Transportation Co.</p>
+                <p class="tagline">3 Generations. One Business.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="index.html#fleet">Fleet / Gallery</a></li>
+                    <li><a href="index.html#leadership">Leadership</a></li>
+                    <li><a href="index.html#careers">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html">Coal Mining</a></li>
+                    <li><a href="services.html">Bulk Cargo Logistics</a></li>
+                    <li><a href="services.html">Hazardous Material</a></li>
+                    <li><a href="services.html">Fuel Logistics</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fa-solid fa-location-dot"></i> 123 Industrial Hub, Metro City</li>
+                    <li><i class="fa-solid fa-envelope"></i> contact@nooritransport.com</li>
+                    <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Noori Transportation Co. All Rights Reserved. | <a href="admin.html" style="color: var(--red); font-weight: 600;">Admin Portal</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const raw = localStorage.getItem('noori_website_data');
+            if (raw) {
+                const data = JSON.parse(raw);
+                
+                // Render dynamic services
+                const servicesContainer = document.getElementById('servicesListContainer');
+                if (servicesContainer && data.services) {
+                    servicesContainer.innerHTML = data.services.map((serv, index) => {
+                        const hasImg = serv.image && serv.image.trim() !== '';
+                        const defaultImg = `https://loremflickr.com/800/600/semi,truck,highway?lock=${index}`;
+                        const imgSrc = hasImg ? serv.image : defaultImg;
+
+                        const iconHtml = serv.image && !serv.icon
+                            ? `<img src="${serv.image}" alt="">`
+                            : `<i class="${serv.icon || 'fa-solid fa-truck'}"></i>`;
+                        
+                        return `
+                            <div class="service-row" id="${serv.id}">
+                                <div class="service-img-wrapper">
+                                    <img src="${imgSrc}" alt="${serv.title}" loading="lazy">
+                                </div>
+                                <div class="service-text-wrapper">
+                                    <div class="service-meta">
+                                        <div class="service-icon-box">
+                                            ${iconHtml}
+                                        </div>
+                                    </div>
+                                    <h2>${serv.title}</h2>
+                                    <p>${serv.desc}</p>
+                                    <a href="index.html#quote" class="btn btn-outline btn-sm">Get Quotes <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            }
+        });
+    </script>
+    <script src="script.js?v=1.2"></script>
+
+</body>
+</html>

@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Noori Transportation Co.</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0F172A;
+            --red: #B91C1C;
+            --steel: #475569;
+            --white: #FFFFFF;
+            --light-bg: #F8FAFC;
+            --border-color: #E2E8F0;
+            --success: #15803d;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.3s ease;
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+            line-height: 1.6;
+        }
+
+        /* Login Screen Styles */
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            padding: 20px;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .login-header h1 span {
+            color: var(--red);
+        }
+
+        .login-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            outline: none;
+            background-color: var(--white);
+        }
+
+        .form-input:focus {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--red);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            background-color: #991b1b;
+        }
+
+        .error-message {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+            border: 1px solid #fca5a5;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-wrapper {
+            display: none;
+            /* Toggle via JS */
+            min-height: 100vh;
+        }
+
+        /* Sidebar & Layout */
+        .dash-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar-brand h2 {
+            font-family: var(--font-heading);
+            color: var(--white);
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+        }
+
+        .sidebar-brand h2 span {
+            color: var(--red);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: #94a3b8;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            background-color: var(--red);
+            color: var(--white);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #94a3b8;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-logout:hover {
+            border-color: var(--red);
+            color: var(--white);
+            background-color: var(--red);
+        }
+
+        /* Content Area */
+        .main-content {
+            padding: 40px;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        .tab-content {
+            display: none;
+            /* Managed by JS */
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .content-header h1 {
+            font-size: 1.8rem;
+            font-family: var(--font-heading);
+        }
+
+        .card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-family: var(--font-heading);
+            margin-bottom: 20px;
+            color: var(--primary);
+            border-left: 4px solid var(--red);
+            padding-left: 12px;
+        }
+
+        /* Form elements in dashboard */
+        .dash-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .btn-save {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-save:hover {
+            background-color: var(--red);
+        }
+
+        /* List Items Styling (Leaders/Clients) */
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .list-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        .list-card-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .list-card-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .list-card-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .list-card-details h4 {
+            font-size: 1rem;
+            color: var(--primary);
+        }
+
+        .list-card-details p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .list-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .btn-action.btn-edit:hover {
+            color: var(--white);
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-action.btn-delete:hover {
+            color: var(--white);
+            background-color: var(--red);
+            border-color: var(--red);
+        }
+
+        /* Success Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--success);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 6px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Add Form style */
+        .add-form-container {
+            border: 1px dashed var(--red);
+            padding: 20px;
+            border-radius: 6px;
+            background-color: rgba(185, 28, 28, 0.02);
+            margin-bottom: 25px;
+        }
+
+        .view-site-btn {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            text-align: center;
+        }
+
+        .view-site-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .file-upload-preview {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 8px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--light-bg);
+        }
+
+        .file-upload-preview img {
+            max-height: 50px;
+            max-width: 100px;
+            object-fit: contain;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .file-upload-preview span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. LOGIN INTERFACE -->
+    <div id="loginSection" class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>Noori <span>Admin</span></h1>
+                <p>Please enter administrative credentials</p>
+            </div>
+
+            <div id="loginError" class="error-message">
+                Invalid email or password. Please try again.
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="admin@example.com" required
+                        autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required
+                        autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-submit">Sign In <i
+                        class="fa-solid fa-arrow-right-to-bracket ml-2"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. DASHBOARD INTERFACE -->
+    <div id="dashboardSection" class="dashboard-wrapper">
+        <div class="dash-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div>
+                    <div class="sidebar-brand">
+                        <h2>Noori <span>Portal</span></h2>
+                    </div>
+                    <ul class="nav-menu">
+                        <li class="nav-item active" data-tab="logoHeroTab">
+                            <i class="fa-solid fa-compass"></i> Logo & Hero
+                        </li>
+                        <li class="nav-item" data-tab="aboutTab">
+                            <i class="fa-solid fa-circle-info"></i> About Section
+                        </li>
+                        <li class="nav-item" data-tab="servicesTab">
+                            <i class="fa-solid fa-truck-moving"></i> Services List
+                        </li>
+                        <li class="nav-item" data-tab="industriesTab">
+                            <i class="fa-solid fa-industry"></i> Industries Served
+                        </li>
+                        <li class="nav-item" data-tab="leadershipTab">
+                            <i class="fa-solid fa-users-gear"></i> Leadership/Employees
+                        </li>
+                        <li class="nav-item" data-tab="clientsTab">
+                            <i class="fa-solid fa-handshake"></i> Trusted Clients
+                        </li>
+                        <li class="nav-item" data-tab="resetTab" style="color: #f87171;">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Danger Zone
+                        </li>
+                    </ul>
+                </div>
+                <div class="sidebar-footer">
+                    <button class="btn-logout" id="logoutButton">
+                        <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Panel Content -->
+            <main class="main-content">
+
+                <!-- Tab: Logo & Hero -->
+                <section id="logoHeroTab" class="tab-content active">
+                    <div class="content-header">
+                        <h1>Logo & Hero Customization</h1>
+                        <a href="index.html" class="view-site-btn" target="_blank">View Website <i
+                                class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">Logo Settings</h3>
+                        <div class="form-group">
+                            <label>Upload Corporate Logo (From Device Memory)</label>
+                            <input type="file" id="logoUploadFile" class="form-input" accept="image/*">
+                            <div id="logoImagePreviewContainer" class="file-upload-preview" style="display: none;">
+                                <img id="logoImagePreview" src="" alt="Logo Preview">
+                                <div>
+                                    <span>Logo image loaded from memory.</span><br>
+                                    <button type="button" id="clearLogoImageBtn"
+                                        style="color: var(--red); border: none; background: none; font-weight: 600; cursor: pointer; margin-top: 5px;">Clear
+                                        and Use Text Logo</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="logoTextSettingsGroup">
+                            <div class="dash-row">
+                                <div class="form-group">
+                                    <label for="logoTextFirst">Brand Prefix (First Word)</label>
+                                    <input type="text" id="logoTextFirst" class="form-input" placeholder="Noori">
+                                </div>
+                                <div class="form-group">
+                                    <label for="logoTextSecond">Brand Suffix (Rest of Text)</label>
+                                    <input type="text" id="logoTextSecond" class="form-input"
+                                        placeholder="Transportation Co.">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">Hero Banner Section</h3>
+                        <div class="form-group">
+                            <label for="heroLabel">Small Top Label</label>
+                            <input type="text" id="heroLabel" class="form-input" placeholder="NOORI TRANSPORTATION CO.">
+                        </div>
+                        <div class="form-group">
+                            <label for="heroHeading">Main Headline</label>
+                            <input type="text" id="heroHeading" class="form-input"
+                                placeholder="Powering Industries Through Reliable Logistics.">
+                        </div>
+                        <div class="form-group">
+                            <label for="heroSubheading">Sub-headline Description</label>
+                            <textarea id="heroSubheading" class="form-input"
+                                placeholder="Logistics description..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="heroBgImage">Background Image URL</label>
+                            <input type="url" id="heroBgImage" class="form-input" placeholder="https://...">
+                        </div>
+                    </div>
+
+                    <button class="btn-save save-settings-btn"><i class="fa-solid fa-floppy-disk"></i> Save Logo &
+                        Hero</button>
+                </section>
+
+                <!-- Tab: About Section -->
+                <section id="aboutTab" class="tab-content">
+                    <div class="content-header">
+                        <h1>About Section</h1>
+                        <a href="index.html" class="view-site-btn" target="_blank">View Website</a>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">Edit Content</h3>
+                        <div class="form-group">
+                            <label for="aboutHeadingInput">Section Heading</label>
+                            <input type="text" id="aboutHeadingInput" class="form-input"
+                                placeholder="About Noori Transportation Co.">
+                        </div>
+                        <div class="form-group">
+                            <label for="aboutTextInput">Content Paragraphs (use double linebreaks to separate
+                                paragraphs)</label>
+                            <textarea id="aboutTextInput" class="form-input" style="min-height: 250px;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">About Section Collage Images</h3>
+                        <div class="form-group">
+                            <label>Collage Image 1 (Mining/Coal)</label>
+                            <input type="file" id="aboutImg1Upload" class="form-input" accept="image/*">
+                            <input type="text" id="aboutImg1Input" class="form-input" placeholder="URL or Base64 data"
+                                style="margin-top: 8px;">
+                        </div>
+                        <div class="form-group">
+                            <label>Collage Image 2 (Logistics/Truck)</label>
+                            <input type="file" id="aboutImg2Upload" class="form-input" accept="image/*">
+                            <input type="text" id="aboutImg2Input" class="form-input" placeholder="URL or Base64 data"
+                                style="margin-top: 8px;">
+                        </div>
+                        <div class="form-group">
+                            <label>Collage Image 3 (Warehouse/Industrial)</label>
+                            <input type="file" id="aboutImg3Upload" class="form-input" accept="image/*">
+                            <input type="text" id="aboutImg3Input" class="form-input" placeholder="URL or Base64 data"
+                                style="margin-top: 8px;">
+                        </div>
+                    </div>
+
+                    <button class="btn-save save-settings-btn"><i class="fa-solid fa-floppy-disk"></i> Save About
+                        Info</button>
+                </section>
+
+                <!-- Tab: Services -->
+                <section id="servicesTab" class="tab-content">
+                    <div class="content-header">
+                        <h1>Manage Services</h1>
+                        <a href="index.html" class="view-site-btn" target="_blank">View Website</a>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title" id="serviceFormTitle">Add New Service</h3>
+                        <div class="add-form-container">
+                            <form id="serviceForm">
+                                <input type="hidden" id="serviceEditId">
+                                <div class="dash-row">
+                                    <div class="form-group">
+                                        <label for="serviceTitle">Service Title</label>
+                                        <input type="text" id="serviceTitle" class="form-input"
+                                            placeholder="Coal Mining" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="serviceIcon">FontAwesome Icon Class (Auto-Suggested)</label>
+                                        <input type="text" id="serviceIcon" class="form-input"
+                                            placeholder="fa-solid fa-truck" required>
+                                        <small style="color: var(--text-muted); font-size: 0.8rem;">Auto-fills on title
+                                            typing. e.g. fa-solid fa-mountain, fa-solid fa-leaf</small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Upload Custom Service Logo (From Device Memory)</label>
+                                    <input type="file" id="serviceUploadFile" class="form-input" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="serviceImage">Service Logo Image URL / Base64 (Autofills on
+                                        upload)</label>
+                                    <input type="text" id="serviceImage" class="form-input"
+                                        placeholder="https://... or base64 data">
+                                </div>
+                                <div class="form-group">
+                                    <label for="serviceDesc">Short Description</label>
+                                    <textarea id="serviceDesc" class="form-input"
+                                        placeholder="Comprehensive logistics solutions..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn-save" id="serviceSubmitBtn"><i
+                                        class="fa-solid fa-plus"></i> Add Service</button>
+                                <button type="button" class="view-site-btn" id="serviceCancelBtn"
+                                    style="display:none; margin-left: 10px;">Cancel</button>
+                            </form>
+                        </div>
+
+                        <h3 class="card-title">Existing Services</h3>
+                        <div class="item-list" id="servicesList">
+                            <!-- Dynamically Loaded -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Industries We Serve -->
+                <section id="industriesTab" class="tab-content">
+                    <div class="content-header">
+                        <h1>Industries We Serve</h1>
+                        <a href="index.html" class="view-site-btn" target="_blank">View Website</a>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">Add Industry Area</h3>
+                        <div class="add-form-container">
+                            <form id="industryForm">
+                                <div class="dash-row">
+                                    <div class="form-group">
+                                        <label for="industryName">Industry Name</label>
+                                        <input type="text" id="industryName" class="form-input"
+                                            placeholder="Chemical Sector" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="industryIcon">FontAwesome Icon Class (Auto-Suggested)</label>
+                                        <input type="text" id="industryIcon" class="form-input"
+                                            placeholder="fa-solid fa-flask" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Upload Custom Industry Logo (From Device Memory)</label>
+                                    <input type="file" id="industryUploadFile" class="form-input" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="industryImage">Industry Logo Image URL / Base64 (Autofills on
+                                        upload)</label>
+                                    <input type="text" id="industryImage" class="form-input"
+                                        placeholder="https://... or base64 data">
+                                </div>
+                                <button type="submit" class="btn-save"><i class="fa-solid fa-plus"></i> Add
+                                    Industry</button>
+                            </form>
+                        </div>
+
+                        <h3 class="card-title">Manage Industries</h3>
+                        <div class="item-list" id="industriesList">
+                            <!-- Dynamically Loaded -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Leadership (CEO & Employees) -->
+                <section id="leadershipTab" class="tab-content">
+                    <div class="content-header">
+                        <h1>Leadership & Employees</h1>
+                        <a href="index.html" class="view-site-btn" target="_blank">View Website</a>
+                    </div>
+
+                    <!-- Add New Leader Profile Form -->
+                    <div class="card">
+                        <h3 class="card-title" id="leaderFormTitle">Add Team Member / Director</h3>
+                        <div class="add-form-container">
+                            <form id="leaderForm">
+                                <input type="hidden" id="leaderEditId">
+                                <div class="dash-row">
+                                    <div class="form-group">
+                                        <label for="leaderName">Full Name</label>
+                                        <input type="text" id="leaderName" class="form-input" placeholder="John Doe"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="leaderDesignation">Designation (e.g. Managing Director /
+                                            CEO)</label>
+                                        <input type="text" id="leaderDesignation" class="form-input"
+                                            placeholder="CEO / Director" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Upload Profile Image (From Device Memory)</label>
+                                    <input type="file" id="leaderUploadFile" class="form-input" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="leaderImage">Profile Image URL (Automatically filled on upload, or input
+                                        custom URL)</label>
+                                    <input type="text" id="leaderImage" class="form-input"
+                                        placeholder="https://... or raw base64 data">
+                                </div>
+                                <div class="form-group">
+                                    <label for="leaderBio">Short Biography</label>
+                                    <textarea id="leaderBio" class="form-input"
+                                        placeholder="Short biography of the team member..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn-save" id="leaderSubmitBtn"><i
+                                        class="fa-solid fa-plus"></i> Add Team Member</button>
+                                <button type="button" class="view-site-btn" id="leaderCancelBtn"
+                                    style="display:none; margin-left: 10px;">Cancel</button>
+                            </form>
+                        </div>
+
+                        <!-- Current Team Members List -->
+                        <h3 class="card-title">Existing Team Members</h3>
+                        <div class="item-list" id="leadersList">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Trusted Clients -->
+                <section id="clientsTab" class="tab-content">
+                    <div class="content-header">
+                        <h1>Trusted Clients Carousel</h1>
+                        <a href="index.html" class="view-site-btn" target="_blank">View Website</a>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">Add Client Company</h3>
+                        <div class="add-form-container">
+                            <form id="clientForm">
+                                <div class="dash-row">
+                                    <div class="form-group">
+                                        <label for="clientName">Company Name</label>
+                                        <input type="text" id="clientName" class="form-input"
+                                            placeholder="Acme Logistics Ltd" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Upload Client Logo (From Device Memory)</label>
+                                        <input type="file" id="clientUploadFile" class="form-input" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="clientLogo">Logo Image URL / Base64</label>
+                                    <input type="text" id="clientLogo" class="form-input"
+                                        placeholder="https://... or raw base64 data">
+                                </div>
+                                <button type="submit" class="btn-save"><i class="fa-solid fa-plus"></i> Add
+                                    Client</button>
+                            </form>
+                        </div>
+
+                        <h3 class="card-title">Manage Clients</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+                            <i class="fa-solid fa-info-circle"></i> Having <strong>more than 5 clients</strong> will
+                            automatically trigger the smooth continuous scrolling animation loop.
+                        </p>
+                        <div class="item-list" id="clientsList">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Danger Zone (Reset) -->
+                <section id="resetTab" class="tab-content">
+                    <div class="content-header">
+                        <h1>Danger Zone</h1>
+                    </div>
+
+                    <div class="card" style="border: 1px solid #f87171; background-color: rgba(239, 68, 68, 0.02);">
+                        <h3 class="card-title" style="border-left-color: #ef4444; color: #b91c1c;">Reset Workspace Data
+                        </h3>
+                        <p style="margin-bottom: 20px;">If you want to clear all customization and restore the website
+                            content to its original default placeholders, press the button below. This action is
+                            irreversible.</p>
+
+                        <button class="btn-submit" id="resetDataBtn"
+                            style="background-color: #dc2626; width: auto; padding: 12px 24px;">
+                            <i class="fa-solid fa-trash-can"></i> Reset to Factory Defaults
+                        </button>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-check"></i> <span id="toastMessage">Changes Saved Successfully!</span>
+    </div>
+
+    <!-- JS Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check auth status on load
+            const loggedIn = sessionStorage.getItem('noori_admin_logged_in');
+            if (loggedIn === 'true') {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+
+            // Authentication Form Handler
+            const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const pass = document.getElementById('loginPassword').value;
+
+                if (email === 'vertexplus2025@gmail.com' && pass === 'admin123') {
+                    sessionStorage.setItem('noori_admin_logged_in', 'true');
+                    document.getElementById('loginError').style.display = 'none';
+                    showDashboard();
+                    showToast('Welcome to Noori Transport Admin Panel');
+                } else {
+                    document.getElementById('loginError').style.display = 'block';
+                }
+            });
+
+            // Logout Button
+            document.getElementById('logoutButton').addEventListener('click', () => {
+                sessionStorage.removeItem('noori_admin_logged_in');
+                showLogin();
+                showToast('Signed out successfully');
+            });
+
+            // Tab Switching Navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    tabContents.forEach(tab => tab.classList.remove('active'));
+
+                    item.classList.add('active');
+                    const tabId = item.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // File reader helper for Base64 conversions
+            function handleImageUpload(inputEl, callback) {
+                const file = inputEl.files[0];
+                if (!file) return;
+
+                // Warn user if file size exceeds typical localStorage limitations (e.g., 2.5MB safety cap)
+                if (file.size > 2.5 * 1024 * 1024) {
+                    alert("This image is too large! Please upload images under 2.5MB to save directly in browser storage.");
+                    inputEl.value = "";
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    callback(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Image file selector bindings
+            let uploadedLogoBase64 = "";
+
+            document.getElementById('logoUploadFile').addEventListener('change', function () {
+                handleImageUpload(this, (base64) => {
+                    uploadedLogoBase64 = base64;
+                    displayLogoPreview(base64);
+                });
+            });
+
+            document.getElementById('clearLogoImageBtn').addEventListener('click', () => {
+                uploadedLogoBase64 = "";
+                document.getElementById('logoUploadFile').value = "";
+                displayLogoPreview("");
+            });
+
+            function displayLogoPreview(base64) {
+                const previewContainer = document.getElementById('logoImagePreviewContainer');
+                const previewImg = document.getElementById('logoImagePreview');
+                const textGroup = document.getElementById('logoTextSettingsGroup');
+
+                if (base64) {
+                    previewImg.src = base64;
+                    previewContainer.style.display = 'flex';
+                    textGroup.style.display = 'none';
+                } else {
+                    previewContainer.style.display = 'none';
+                    textGroup.style.display = 'block';
+                }
+            }
+
+            document.getElementById('leaderUploadFile').addEventListener('change', function () {
+                handleImageUpload(this, (base64) => {
+                    document.getElementById('leaderImage').value = base64;
+                });
+            });
+
+            document.getElementById('clientUploadFile').addEventListener('change', function () {
+                handleImageUpload(this, (base64) => {
+                    document.getElementById('clientLogo').value = base64;
+                });
+            });
+
+            // About Section Collage uploads
+            document.getElementById('aboutImg1Upload').addEventListener('change', function () {
+                handleImageUpload(this, (base64) => {
+                    document.getElementById('aboutImg1Input').value = base64;
+                });
+            });
+            document.getElementById('aboutImg2Upload').addEventListener('change', function () {
+                handleImageUpload(this, (base64) => {
+                    document.getElementById('aboutImg2Input').value = base64;
+                });
+            });
+            document.getElementById('aboutImg3Upload').addEventListener('change', function () {
+                handleImageUpload(this, (base64) => {
+                    document.getElementById('aboutImg3Input').value = base64;
+                });
+            });
+
+            // Data Persistence Logic
+            let appData = {};
+
+            function loadData() {
+                const raw = localStorage.getItem('noori_website_data');
+                if (raw) {
+                    appData = JSON.parse(raw);
+                }
+
+                // Populate Form Fields
+                if (appData.logo) {
+                    document.getElementById('logoTextFirst').value = appData.logo.textFirst || '';
+                    document.getElementById('logoTextSecond').value = appData.logo.textSecond || '';
+                    uploadedLogoBase64 = appData.logo.image || '';
+                    displayLogoPreview(uploadedLogoBase64);
+                }
+                if (appData.hero) {
+                    document.getElementById('heroLabel').value = appData.hero.label || '';
+                    document.getElementById('heroHeading').value = appData.hero.heading || '';
+                    document.getElementById('heroSubheading').value = appData.hero.subheading || '';
+                    document.getElementById('heroBgImage').value = appData.hero.bgImage || '';
+                }
+                if (appData.about) {
+                    document.getElementById('aboutHeadingInput').value = appData.about.heading || '';
+                    document.getElementById('aboutTextInput').value = appData.about.text || '';
+                    document.getElementById('aboutImg1Input').value = appData.about.img1 || '';
+                    document.getElementById('aboutImg2Input').value = appData.about.img2 || '';
+                    document.getElementById('aboutImg3Input').value = appData.about.img3 || '';
+                }
+
+                renderServices();
+                renderIndustries();
+                renderLeaders();
+                renderClients();
+            }
+
+            // Save Functions for Logo & Hero, About Section
+            const saveButtons = document.querySelectorAll('.save-settings-btn');
+            saveButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update Local State
+                    appData.logo = {
+                        textFirst: document.getElementById('logoTextFirst').value,
+                        textSecond: document.getElementById('logoTextSecond').value,
+                        image: uploadedLogoBase64
+                    };
+                    appData.hero = {
+                        label: document.getElementById('heroLabel').value,
+                        heading: document.getElementById('heroHeading').value,
+                        subheading: document.getElementById('heroSubheading').value,
+                        bgImage: document.getElementById('heroBgImage').value
+                    };
+                    appData.about = {
+                        heading: document.getElementById('aboutHeadingInput').value,
+                        text: document.getElementById('aboutTextInput').value,
+                        img1: document.getElementById('aboutImg1Input').value,
+                        img2: document.getElementById('aboutImg2Input').value,
+                        img3: document.getElementById('aboutImg3Input').value
+                    };
+
+                    localStorage.setItem('noori_website_data', JSON.stringify(appData));
+                    showToast('Changes saved successfully');
+                });
+            });
+
+            // Services Image Upload binding
+            document.getElementById('serviceUploadFile').addEventListener('change', function () {
+                handleImageUpload(this, (base64) => {
+                    document.getElementById('serviceImage').value = base64;
+                });
+            });
+
+            // Auto-Suggest Icons Keyword Mapping
+            const iconKeywordMap = {
+                'coal': 'fa-solid fa-mountain',
+                'mine': 'fa-solid fa-mountain',
+                'mining': 'fa-solid fa-mountain',
+                'earth': 'fa-solid fa-mountain',
+                'truck': 'fa-solid fa-truck-moving',
+                'trucks': 'fa-solid fa-truck-moving',
+                'transport': 'fa-solid fa-truck-moving',
+                'transportation': 'fa-solid fa-truck-moving',
+                'logistics': 'fa-solid fa-boxes-stacked',
+                'cargo': 'fa-solid fa-boxes-stacked',
+                'bulk': 'fa-solid fa-boxes-stacked',
+                'warehouse': 'fa-solid fa-warehouse',
+                'storage': 'fa-solid fa-warehouse',
+                'hazardous': 'fa-solid fa-skull-crossbones',
+                'skull': 'fa-solid fa-skull-crossbones',
+                'poison': 'fa-solid fa-skull-crossbones',
+                'chemical': 'fa-solid fa-flask',
+                'chemicals': 'fa-solid fa-flask',
+                'fertilizer': 'fa-solid fa-seedling',
+                'plant': 'fa-solid fa-seedling',
+                'waste': 'fa-solid fa-dumpster',
+                'dumpster': 'fa-solid fa-dumpster',
+                'refuse': 'fa-solid fa-dumpster',
+                'fuel': 'fa-solid fa-gas-pump',
+                'gasoline': 'fa-solid fa-gas-pump',
+                'petroleum': 'fa-solid fa-gas-pump',
+                'tanker': 'fa-solid fa-gas-pump',
+                'oil': 'fa-solid fa-oil-well',
+                'well': 'fa-solid fa-oil-well',
+                'gas': 'fa-solid fa-oil-well',
+                'clean': 'fa-solid fa-leaf',
+                'hydrogen': 'fa-solid fa-leaf',
+                'energy': 'fa-solid fa-solar-panel',
+                'solar': 'fa-solid fa-solar-panel',
+                'wind': 'fa-solid fa-wind',
+                'power': 'fa-solid fa-bolt',
+                'electricity': 'fa-solid fa-bolt',
+                'lightning': 'fa-solid fa-bolt',
+                'infrastructure': 'fa-solid fa-bridge',
+                'bridge': 'fa-solid fa-bridge',
+                'road': 'fa-solid fa-route',
+                'route': 'fa-solid fa-route',
+                'manufacturing': 'fa-solid fa-industry',
+                'factory': 'fa-solid fa-industry',
+                'industries': 'fa-solid fa-industry'
+            };
+
+            function autoSuggestIcon(text, outputInputEl) {
+                if (!text) return;
+                const words = text.toLowerCase().split(/\s+/);
+                for (let word of words) {
+                    word = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+                    if (iconKeywordMap[word]) {
+                        outputInputEl.value = iconKeywordMap[word];
+                        break;
+                    }
+                }
+            }
+
+            // Bind autocomplete listeners
+            document.getElementById('serviceTitle').addEventListener('input', function () {
+                autoSuggestIcon(this.value, document.getElementById('serviceIcon'));
+            });
+            document.getElementById('serviceDesc').addEventListener('input', function () {
+                if (!document.getElementById('serviceIcon').value) {
+                    autoSuggestIcon(this.value, document.getElementById('serviceIcon'));
+                }
+            });
+
+            // Services Add/Edit/Delete
+            const serviceForm = document.getElementById('serviceForm');
+            serviceForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const id = document.getElementById('serviceEditId').value;
+                const title = document.getElementById('serviceTitle').value;
+                const icon = document.getElementById('serviceIcon').value;
+                const image = document.getElementById('serviceImage').value;
+                const desc = document.getElementById('serviceDesc').value;
+
+                if (!appData.services) appData.services = [];
+
+                if (id) {
+                    const index = appData.services.findIndex(s => s.id === id);
+                    if (index !== -1) {
+                        appData.services[index] = { id, title, icon, image, desc };
+                        showToast('Service updated');
+                    }
+                } else {
+                    const newId = 'serv-' + Date.now();
+                    appData.services.push({ id: newId, title, icon, image, desc });
+                    showToast('New service added');
+                }
+
+                localStorage.setItem('noori_website_data', JSON.stringify(appData));
+                resetServiceForm();
+                renderServices();
+            });
+
+            function renderServices() {
+                const list = document.getElementById('servicesList');
+                if (!appData.services || appData.services.length === 0) {
+                    list.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">No services defined.</p>';
+                    return;
+                }
+
+                list.innerHTML = appData.services.map(serv => {
+                    return `
+                        <div class="list-card">
+                            <div class="list-card-info">
+                                <div class="list-card-avatar" style="background-color: var(--primary);">
+                                    <i class="${escapeHtml(serv.icon)}" style="color: var(--white); font-size: 1.2rem;"></i>
+                                </div>
+                                <div class="list-card-details">
+                                    <h4>${escapeHtml(serv.title)}</h4>
+                                    <p>${escapeHtml(serv.desc.substring(0, 70))}...</p>
+                                </div>
+                            </div>
+                            <div class="list-actions">
+                                <button class="btn-action btn-edit" onclick="editService('${serv.id}')" title="Edit Service">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button class="btn-action btn-delete" onclick="deleteService('${serv.id}')" title="Delete Service">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            window.editService = function (id) {
+                const serv = appData.services.find(s => s.id === id);
+                if (!serv) return;
+
+                document.getElementById('serviceEditId').value = serv.id;
+                document.getElementById('serviceTitle').value = serv.title;
+                document.getElementById('serviceIcon').value = serv.icon;
+                document.getElementById('serviceImage').value = serv.image || '';
+                document.getElementById('serviceDesc').value = serv.desc;
+
+                document.getElementById('serviceFormTitle').textContent = 'Edit Service: ' + serv.title;
+                document.getElementById('serviceSubmitBtn').innerHTML = '<i class="fa-solid fa-check"></i> Update Service';
+                document.getElementById('serviceCancelBtn').style.display = 'inline-block';
+
+                document.getElementById('servicesTab').scrollIntoView({ behavior: 'smooth' });
+            };
+
+            window.deleteService = function (id) {
+                if (confirm('Are you sure you want to delete this service?')) {
+                    appData.services = appData.services.filter(s => s.id !== id);
+                    localStorage.setItem('noori_website_data', JSON.stringify(appData));
+                    renderServices();
+                    showToast('Service deleted');
+                }
+            };
+
+            document.getElementById('serviceCancelBtn').addEventListener('click', resetServiceForm);
+
+            function resetServiceForm() {
+                serviceForm.reset();
+                document.getElementById('serviceEditId').value = '';
+                document.getElementById('serviceFormTitle').textContent = 'Add New Service';
+                document.getElementById('serviceSubmitBtn').innerHTML = '<i class="fa-solid fa-plus"></i> Add Service';
+                document.getElementById('serviceCancelBtn').style.display = 'none';
+            }
+
+
+            // Industry Image Upload binding
+            document.getElementById('industryUploadFile').addEventListener('change', function () {
+                handleImageUpload(this, (base64) => {
+                    document.getElementById('industryImage').value = base64;
+                });
+            });
+
+            // Bind autocomplete listeners for industry name
+            document.getElementById('industryName').addEventListener('input', function () {
+                autoSuggestIcon(this.value, document.getElementById('industryIcon'));
+            });
+
+            // Industries Add/Delete
+            const industryForm = document.getElementById('industryForm');
+            industryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('industryName').value;
+                const icon = document.getElementById('industryIcon').value;
+                const image = document.getElementById('industryImage').value;
+
+                if (!appData.industries) appData.industries = [];
+
+                const newId = 'ind-' + Date.now();
+                appData.industries.push({ id: newId, name, icon, image });
+                localStorage.setItem('noori_website_data', JSON.stringify(appData));
+
+                industryForm.reset();
+                document.getElementById('industryUploadFile').value = "";
+                renderIndustries();
+                showToast('Industry area added');
+            });
+
+            function renderIndustries() {
+                const list = document.getElementById('industriesList');
+                if (!appData.industries || appData.industries.length === 0) {
+                    list.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">No industries defined.</p>';
+                    return;
+                }
+
+                list.innerHTML = appData.industries.map(ind => {
+                    return `
+                        <div class="list-card">
+                            <div class="list-card-info">
+                                <div class="list-card-avatar" style="background-color: var(--red);">
+                                    <i class="${escapeHtml(ind.icon)}" style="color: var(--white);"></i>
+                                </div>
+                                <div class="list-card-details">
+                                    <h4>${escapeHtml(ind.name)}</h4>
+                                </div>
+                            </div>
+                            <div class="list-actions">
+                                <button class="btn-action btn-delete" onclick="deleteIndustry('${ind.id}')" title="Delete Industry">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            window.deleteIndustry = function (id) {
+                if (confirm('Are you sure you want to delete this industry sector?')) {
+                    appData.industries = appData.industries.filter(i => i.id !== id);
+                    localStorage.setItem('noori_website_data', JSON.stringify(appData));
+                    renderIndustries();
+                    showToast('Industry sector deleted');
+                }
+            };
+
+
+            // Leadership: Add or Update Member
+            const leaderForm = document.getElementById('leaderForm');
+            leaderForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const id = document.getElementById('leaderEditId').value;
+                const name = document.getElementById('leaderName').value;
+                const designation = document.getElementById('leaderDesignation').value;
+                const image = document.getElementById('leaderImage').value;
+                const bio = document.getElementById('leaderBio').value;
+
+                if (id) {
+                    const index = appData.leadership.findIndex(l => l.id === id);
+                    if (index !== -1) {
+                        appData.leadership[index] = { id, name, designation, image, bio };
+                        showToast('Team member profile updated');
+                    }
+                } else {
+                    const newId = 'leader-' + Date.now();
+                    appData.leadership.push({ id: newId, name, designation, image, bio });
+                    showToast('New team member added');
+                }
+
+                localStorage.setItem('noori_website_data', JSON.stringify(appData));
+                resetLeaderForm();
+                renderLeaders();
+            });
+
+            // Client: Add
+            const clientForm = document.getElementById('clientForm');
+            clientForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('clientName').value;
+                const logo = document.getElementById('clientLogo').value;
+
+                appData.clients.push({ name, logo });
+                localStorage.setItem('noori_website_data', JSON.stringify(appData));
+
+                clientForm.reset();
+                document.getElementById('clientUploadFile').value = "";
+                renderClients();
+                showToast('Client company added');
+            });
+
+            // Render Lists functions
+            function renderLeaders() {
+                const list = document.getElementById('leadersList');
+                if (!appData.leadership || appData.leadership.length === 0) {
+                    list.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">No leadership members defined. Add some above.</p>';
+                    return;
+                }
+
+                list.innerHTML = appData.leadership.map(leader => {
+                    const avatarHtml = leader.image
+                        ? `<img src="${leader.image}" alt="">`
+                        : `<i class="fa-solid fa-user-tie"></i>`;
+
+                    return `
+                        <div class="list-card">
+                            <div class="list-card-info">
+                                <div class="list-card-avatar">
+                                    ${avatarHtml}
+                                </div>
+                                <div class="list-card-details">
+                                    <h4>${escapeHtml(leader.name)}</h4>
+                                    <p>${escapeHtml(leader.designation)}</p>
+                                </div>
+                            </div>
+                            <div class="list-actions">
+                                <button class="btn-action btn-edit" onclick="editLeader('${leader.id}')" title="Edit Profile">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button class="btn-action btn-delete" onclick="deleteLeader('${leader.id}')" title="Delete Profile">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            function renderClients() {
+                const list = document.getElementById('clientsList');
+                if (!appData.clients || appData.clients.length === 0) {
+                    list.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">No clients defined. Add some above.</p>';
+                    return;
+                }
+
+                list.innerHTML = appData.clients.map((client, index) => {
+                    const avatarHtml = client.logo
+                        ? `<img src="${client.logo}" alt="" style="object-fit: contain;">`
+                        : `<i class="fa-solid fa-building"></i>`;
+
+                    return `
+                        <div class="list-card">
+                            <div class="list-card-info">
+                                <div class="list-card-avatar">
+                                    ${avatarHtml}
+                                </div>
+                                <div class="list-card-details">
+                                    <h4>${escapeHtml(client.name)}</h4>
+                                </div>
+                            </div>
+                            <div class="list-actions">
+                                <button class="btn-action btn-delete" onclick="deleteClient(${index})" title="Delete Client">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Expose actions to global scope for onclick attributes
+            window.editLeader = function (id) {
+                const leader = appData.leadership.find(l => l.id === id);
+                if (!leader) return;
+
+                document.getElementById('leaderEditId').value = leader.id;
+                document.getElementById('leaderName').value = leader.name;
+                document.getElementById('leaderDesignation').value = leader.designation;
+                document.getElementById('leaderImage').value = leader.image || '';
+                document.getElementById('leaderBio').value = leader.bio;
+
+                document.getElementById('leaderFormTitle').textContent = 'Edit Profile: ' + leader.name;
+                document.getElementById('leaderSubmitBtn').innerHTML = '<i class="fa-solid fa-check"></i> Update Profile';
+                document.getElementById('leaderCancelBtn').style.display = 'inline-block';
+
+                document.getElementById('leadershipTab').scrollIntoView({ behavior: 'smooth' });
+            };
+
+            window.deleteLeader = function (id) {
+                if (confirm('Are you sure you want to delete this team member?')) {
+                    appData.leadership = appData.leadership.filter(l => l.id !== id);
+                    localStorage.setItem('noori_website_data', JSON.stringify(appData));
+                    renderLeaders();
+                    showToast('Team member profile deleted');
+                }
+            };
+
+            window.deleteClient = function (index) {
+                if (confirm('Are you sure you want to delete this client?')) {
+                    appData.clients.splice(index, 1);
+                    localStorage.setItem('noori_website_data', JSON.stringify(appData));
+                    renderClients();
+                    showToast('Client company deleted');
+                }
+            };
+
+            document.getElementById('leaderCancelBtn').addEventListener('click', resetLeaderForm);
+
+            function resetLeaderForm() {
+                leaderForm.reset();
+                document.getElementById('leaderUploadFile').value = "";
+                document.getElementById('leaderEditId').value = '';
+                document.getElementById('leaderFormTitle').textContent = 'Add Team Member / Director';
+                document.getElementById('leaderSubmitBtn').innerHTML = '<i class="fa-solid fa-plus"></i> Add Team Member';
+                document.getElementById('leaderCancelBtn').style.display = 'none';
+            }
+
+            // Factory Reset Button
+            document.getElementById('resetDataBtn').addEventListener('click', () => {
+                if (confirm('Are you sure you want to restore all contents to their factory default placeholders? Any custom edits will be lost.')) {
+                    localStorage.removeItem('noori_website_data');
+                    showToast('Restored workspace data to defaults');
+                    loadData();
+                }
+            });
+
+            // UI Utility helpers
+            function showLogin() {
+                document.getElementById('loginSection').style.display = 'flex';
+                document.getElementById('dashboardSection').style.display = 'none';
+            }
+
+            function showDashboard() {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+                loadData();
+            }
+
+            function showToast(message) {
+                const toast = document.getElementById('toast');
+                document.getElementById('toastMessage').textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return str.replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+        });
+    </script>
+</body>
+
+</html>

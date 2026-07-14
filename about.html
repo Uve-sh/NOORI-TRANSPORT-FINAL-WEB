@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Noori Transportation Co.</title>
+    <meta name="description" content="Learn about Noori Transportation Co. - Our legacy across 3 generations, our vision for industrial logistics, values, services, and how to get in touch.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=1.2">
+    
+    <style>
+        /* Subpage-specific styling */
+        .subpage-hero {
+            position: relative;
+            height: 40vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: var(--primary);
+        }
+
+        .subpage-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .subpage-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .subpage-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            color: var(--white);
+        }
+
+        .subpage-hero-content h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-family: var(--font-heading);
+            font-weight: 800;
+        }
+
+        .breadcrumbs {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .breadcrumbs a {
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--red);
+        }
+
+        .about-layout-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 4rem;
+            padding: 6rem 0;
+        }
+
+        /* Sidebar Sticky Navigation */
+        .about-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-nav-card {
+            background-color: var(--white);
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sidebar-nav-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #E2E8F0;
+            color: var(--primary);
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-menu-item {
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sidebar-menu-item:hover, .sidebar-menu-item.active {
+            background-color: var(--light-bg);
+            color: var(--red);
+        }
+
+        .sidebar-menu-item.active {
+            background-color: rgba(185, 28, 28, 0.05);
+            border-left: 4px solid var(--red);
+            padding-left: 12px;
+        }
+
+        /* Content Sections */
+        .about-section {
+            background-color: var(--white);
+            padding: 3rem;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-sm);
+            scroll-margin-top: 120px; /* Offset for sticky navbar */
+            display: none; /* Hide sections by default to block scrolling */
+        }
+        
+        .about-section.active {
+            display: block; /* Show only active tab content */
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .about-section h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--red);
+            margin-top: 8px;
+        }
+
+        .about-section p {
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        /* Vision Cards */
+        .vision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .vision-card {
+            background-color: var(--light-bg);
+            border: 1px solid #E2E8F0;
+            padding: 2rem;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .vision-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--red);
+        }
+
+        .vision-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .vision-card:hover .vision-icon {
+            background-color: var(--red);
+        }
+
+        .vision-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Value List */
+        .value-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .value-item {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .value-num {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--red);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .value-text h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-text p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Mini-Services Grid */
+        .mini-services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .mini-service-box {
+            padding: 1.5rem;
+            background-color: var(--light-bg);
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+        }
+
+        .mini-service-box i {
+            font-size: 2rem;
+            color: var(--red);
+        }
+
+        .mini-service-box h4 {
+            font-size: 1.05rem;
+            color: var(--primary);
+        }
+
+        /* Get in touch form */
+        .about-contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .contact-field-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .contact-input {
+            padding: 10px 14px;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .contact-input:focus {
+            border-color: var(--red);
+        }
+
+        .contact-details-box {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-details-box h3 {
+            color: var(--white);
+            font-size: 1.4rem;
+        }
+
+        .contact-item-info {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .contact-item-info i {
+            color: var(--red);
+            font-size: 1.2rem;
+            margin-top: 4px;
+        }
+
+        .contact-item-info div p {
+            color: #CBD5E1;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .contact-item-info div strong {
+            color: var(--white);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        @media (max-width: 992px) {
+            .about-layout-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .about-sidebar {
+                position: relative;
+                top: 0;
+            }
+            .sidebar-menu {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .about-contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <span class="logo" id="siteLogo">Noori <span>Transportation Co.</span></span>
+                <span class="logo-tagline">3 Generations, 1 Business</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#home">Home</a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-trigger">About Us <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#profile">Company Profile</a>
+                        <a href="#vision">Our Vision</a>
+                        <a href="#values">What We Stand For</a>
+                        <a href="#services">Our Services</a>
+                        <a href="#contact">Get in Touch</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="services.html" class="dropdown-trigger">Services <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-content" id="servicesDropdownMenu">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+                <a href="index.html#why-us">Why Us</a>
+                <a href="index.html#leadership">Leadership</a>
+                <a href="index.html#gallery">Gallery</a>
+                <a href="index.html#careers">Careers</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <a href="index.html#quote" class="btn btn-primary">Get Quote</a>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Subpage Hero -->
+    <section class="subpage-hero">
+        <div class="subpage-hero-bg">
+            <img src="https://loremflickr.com/1600/900/semi,highway,truck" alt="About Noori Transportation Co.">
+        </div>
+        <div class="subpage-hero-content container">
+            <h1>About Our Company</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a> &nbsp;/&nbsp; About Us
+            </div>
+        </div>
+    </section>
+
+    <!-- About Main Layout Section -->
+    <div class="container">
+        <div class="about-layout-grid">
+            
+            <!-- Left Sticky Sidebar index -->
+            <aside class="about-sidebar">
+                <div class="sidebar-nav-card">
+                    <h3>About Sections</h3>
+                    <div class="sidebar-menu">
+                        <div class="sidebar-menu-item active" onclick="showTab('profile')">
+                            <i class="fa-solid fa-circle-nodes"></i> Company Profile
+                        </div>
+                        <div class="sidebar-menu-item" onclick="showTab('vision')">
+                            <i class="fa-solid fa-bullseye"></i> Our Vision & Mission
+                        </div>
+                        <div class="sidebar-menu-item" onclick="showTab('values')">
+                            <i class="fa-solid fa-shield-halved"></i> What We Stand For
+                        </div>
+                        <div class="sidebar-menu-item" onclick="showTab('services')">
+                            <i class="fa-solid fa-gears"></i> Our Services
+                        </div>
+                        <div class="sidebar-menu-item" onclick="showTab('contact')">
+                            <i class="fa-solid fa-envelope-open-text"></i> Get in Touch
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Content Cards -->
+            <main class="about-content-area">
+                
+                <!-- Section: Company Profile -->
+                <section id="profile" class="about-section">
+                    <h2>Company Profile</h2>
+                    <p>Noori Transportation Co. stands as a premier beacon of reliability in the industrial logistics sector, combining over three generations of specialized transport and logistical competence. Founded with a single commercial vehicle, our enterprise has flourished into an multi-faceted logistics operator handling coal mining, bulk cargo transportation, hazardous materials, and energy sector solutions.</p>
+                    <p>We pride ourselves on supporting core industry infrastructure across the nation. Over the decades, our operations have evolved to incorporate advanced fleet safety telemetry, environmental waste compliances, and robust supply chain integrations. Today, Noori Transportation Co. remains a trusted generational partner for chemical industries, mining networks, state corporations, and infrastructure projects.</p>
+                    <p>With an extensive heavy-heavy fleet capacity, including dumpers, liquid tankers, specialized carriers, and earthmoving apparatus, we execute safe transit of commodities under strict compliance with environmental regulations and state safety mandates.</p>
+                </section>
+
+                <!-- Section: Our Vision -->
+                <section id="vision" class="about-section">
+                    <h2>Our Vision & Mission</h2>
+                    <p>At Noori Transportation Co., we align our growth with the long-term sustainability of the industries we serve, ensuring national supply chains operate with zero disruptions.</p>
+                    
+                    <div class="vision-grid">
+                        <div class="vision-card">
+                            <div class="vision-icon">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <h3>Our Vision</h3>
+                            <p>To lead the future of industrial logistics by setting benchmark safety systems, adopting green energy transport modules, and offering unmatched multi-modal supply solutions across India.</p>
+                        </div>
+                        <div class="vision-card">
+                            <div class="vision-icon">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <h3>Our Mission</h3>
+                            <p>To safely, reliably, and efficiently transport industrial commodities while building generational trust with partners, upholding strict regulations, and protecting the environments we navigate.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: What We Stand For -->
+                <section id="values" class="about-section">
+                    <h2>What We Stand For</h2>
+                    <p>Our core values are the building blocks that have guided Noori Transportation Co. across three generations, cementing our reputation as an industry leader.</p>
+                    
+                    <div class="value-grid">
+                        <div class="value-item">
+                            <div class="value-num">01</div>
+                            <div class="value-text">
+                                <h3>Safety First</h3>
+                                <p>We view safety not as a metric, but as an absolute moral obligation. Every fleet vehicle, operator, and transit route undergoes strict safety audits.</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-num">02</div>
+                            <div class="value-text">
+                                <h3>Generational Trust</h3>
+                                <p>We honor our legacy of reliability, treating client relations as long-term partnerships built on integrity, accountability, and transparency.</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-num">03</div>
+                            <div class="value-text">
+                                <h3>Operational Excellence</h3>
+                                <p>Using advanced route optimization and fleet telemetry, we guarantee timing windows, ensuring industrial hubs never face down-times.</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-num">04</div>
+                            <div class="value-text">
+                                <h3>Environmental Compliance</h3>
+                                <p>We adhere rigorously to chemical and hazardous waste transit compliances, actively transitioning into low-emission logistical equipment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Our Services -->
+                <section id="services" class="about-section">
+                    <h2>Our Services Overview</h2>
+                    <p>From mass resource extraction to delicate energy logistics, we cover the full cycle of industrial freight transport requirements.</p>
+                    
+                    <div class="mini-services-list" id="aboutServicesGrid">
+                        <!-- Loaded dynamically from localStorage to keep in sync -->
+                    </div>
+                </section>
+
+                <!-- Section: Get in Touch -->
+                <section id="contact" class="about-section">
+                    <h2>Get in Touch</h2>
+                    <p>Whether you require bulk fuel carrier quotes, mining operations logistics planning, or cargo transit consultancy, our representative team is available 24/7.</p>
+                    
+                    <div class="about-contact-grid">
+                        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent.'); this.reset();">
+                            <div class="contact-field-group">
+                                <label for="contactName">Your Name</label>
+                                <input type="text" id="contactName" class="contact-input" placeholder="Enter name" required>
+                            </div>
+                            <div class="contact-field-group">
+                                <label for="contactEmail">Email Address</label>
+                                <input type="email" id="contactEmail" class="contact-input" placeholder="name@company.com" required>
+                            </div>
+                            <div class="contact-field-group">
+                                <label for="contactMessage">Message / Logistics Needs</label>
+                                <textarea id="contactMessage" class="contact-input" style="min-height: 120px;" placeholder="Describe your transport volume..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: fit-content; padding: 0.8rem 2rem;">Send Inquiry</button>
+                        </form>
+
+                        <div class="contact-details-box">
+                            <h3>Corporate Info</h3>
+                            
+                            <div class="contact-item-info">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <strong>Headquarters</strong>
+                                    <p>123 Industrial Hub, Metro City</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item-info">
+                                <i class="fa-solid fa-phone"></i>
+                                <div>
+                                    <strong>Phone Support</strong>
+                                    <p>+91 98765 43210 (Sales)</p>
+                                    <p>+91 98765 43211 (Fleet Dispatch)</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item-info">
+                                <i class="fa-solid fa-envelope"></i>
+                                <div>
+                                    <strong>Email Channels</strong>
+                                    <p>contact@nooritransport.com</p>
+                                    <p>quotes@nooritransport.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Company</h3>
+                <p>Noori Transportation Co.</p>
+                <p class="tagline">3 Generations. One Business.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="#profile">About Us</a></li>
+                    <li><a href="index.html#fleet">Fleet / Gallery</a></li>
+                    <li><a href="index.html#leadership">Leadership</a></li>
+                    <li><a href="index.html#careers">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html">Coal Mining</a></li>
+                    <li><a href="services.html">Bulk Cargo Logistics</a></li>
+                    <li><a href="services.html">Hazardous Material</a></li>
+                    <li><a href="services.html">Fuel Logistics</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fa-solid fa-location-dot"></i> 123 Industrial Hub, Metro City</li>
+                    <li><i class="fa-solid fa-envelope"></i> contact@nooritransport.com</li>
+                    <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Noori Transportation Co. All Rights Reserved. | <a href="admin.html" style="color: var(--red); font-weight: 600;">Admin Portal</a></p>
+        </div>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script>
+        // Tab navigation switching logic
+        function showTab(id) {
+            // 1. Hide all sections
+            const sections = document.querySelectorAll('.about-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // 2. Show the targeted section
+            const targetSection = document.getElementById(id);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // 3. Highlight the active menu item in sidebar
+            const navItems = document.querySelectorAll('.sidebar-menu-item');
+            navItems.forEach(item => {
+                const clickAttr = item.getAttribute('onclick') || '';
+                if (clickAttr.includes(`'${id}'`)) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            // 4. Update the URL hash without triggering an anchor jump
+            history.pushState(null, null, '#' + id);
+        }
+
+        // Listen for browser/navbar hash clicks to switch tabs
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showTab(hash);
+            }
+        });
+
+        // Initialize dynamic elements from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const raw = localStorage.getItem('noori_website_data');
+            if (raw) {
+                const data = JSON.parse(raw);
+                
+                // Render dynamic services overview
+                const servicesGrid = document.getElementById('aboutServicesGrid');
+                if (servicesGrid && data.services) {
+                    servicesGrid.innerHTML = data.services.map(serv => {
+                        const iconHtml = serv.image
+                            ? `<img src="${serv.image}" alt="" style="max-height: 40px; max-width: 40px; object-fit: contain; margin-bottom: 10px;">`
+                            : `<i class="${serv.icon || 'fa-solid fa-truck'}" style="margin-bottom: 10px;"></i>`;
+                        return `
+                            <div class="mini-service-box">
+                                ${iconHtml}
+                                <h4>${serv.title}</h4>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            }
+            
+            // Highlight initial tab based on URL hash or default to profile
+            let initialTab = 'profile';
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                initialTab = hash;
+            }
+            showTab(initialTab);
+        });
+    </script>
+    <script src="script.js?v=1.2"></script>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noori Transportation Co. | 3 Generations. One Business.</title>
+    <meta name="description" content="Noori Transportation Co. - Powering Industries Through Reliable Logistics. Integrated mining, transportation, and industrial logistics solutions.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=1.2">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <span class="logo" id="siteLogo">Noori <span>Transportation Co.</span></span>
+                <span class="logo-tagline">3 Generations, 1 Business</span>
+            </a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <div class="dropdown">
+                    <a href="about.html" class="dropdown-trigger">About Us <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="about.html#profile">Company Profile</a>
+                        <a href="about.html#vision">Our Vision</a>
+                        <a href="about.html#values">What We Stand For</a>
+                        <a href="about.html#services">Our Services</a>
+                        <a href="about.html#contact">Get in Touch</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="services.html" class="dropdown-trigger">Services <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-content" id="servicesDropdownMenu">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+                <a href="#why-us">Why Us</a>
+                <a href="#leadership">Leadership</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#careers">Careers</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="#quote" class="btn btn-primary">Get Quote</a>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <img src="https://loremflickr.com/1600/900/semi,truck,highway" id="heroBgImage" alt="Industrial Transportation Fleet">
+            <div class="overlay"></div>
+        </div>
+        <div class="hero-content container">
+            <div class="hero-text fade-up">
+                <span class="small-label" id="heroLabel">NOORI TRANSPORTATION CO.</span>
+                <h1 class="main-heading" id="heroHeading">Powering Industries Through Reliable Logistics.</h1>
+                <p class="sub-heading" id="heroSubheading">Integrated mining, transportation, and industrial logistics solutions delivering operational excellence, safety, and reliability across multiple industries.</p>
+                <div class="hero-buttons">
+                    <a href="#quote" class="btn btn-primary">Get a Quote</a>
+                    <a href="services.html" class="btn btn-secondary">Explore Services</a>
+                </div>
+            </div>
+            <div class="hero-card fade-up delay-1">
+                <ul>
+                    <li><i class="fa-solid fa-check-circle"></i> Trusted Industrial Partner</li>
+                    <li><i class="fa-solid fa-check-circle"></i> 3 Generations of Excellence</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Heavy Fleet Operations</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Safety & Compliance</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Overview Preview -->
+    <section id="about" class="about">
+        <div class="container split-layout">
+            <div class="about-content fade-up" id="aboutContent">
+                <h2 id="aboutHeading">About Noori Transportation Co.</h2>
+                <div id="aboutParagraphs">
+                    <p>Noori Transport Co. is a leading provider of integrated mining, transportation, and energy logistics solutions, serving industries with reliability, efficiency, and uncompromising safety standards. With expertise spanning multiple sectors, we deliver end-to-end solutions that support the movement of essential resources and industrial commodities.</p>
+                    <p>Our operations include coal mining, coal transportation, bulk cargo logistics, hazardous materials transportation, industrial waste transportation, fuel logistics, and hydrogen & clean energy logistics...</p>
+                </div>
+                <a href="about.html" class="btn btn-outline mt-3">Learn More</a>
+            </div>
+            <div class="about-collage fade-up delay-1">
+                <div class="collage-item img-1">
+                    <img src="https://loremflickr.com/600/400/coal,mine" id="aboutImg1" alt="Coal Mining">
+                </div>
+                <div class="collage-item img-2">
+                    <img src="https://loremflickr.com/600/400/freight,truck" id="aboutImg2" alt="Freight Logistics">
+                </div>
+                <div class="collage-item img-3">
+                    <img src="https://loremflickr.com/600/400/industrial,warehouse" id="aboutImg3" alt="Industrial Warehouse">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legacy Section -->
+    <section class="legacy">
+        <div class="legacy-overlay"></div>
+        <div class="container legacy-content fade-up">
+            <h2>3 Generations. One Business.</h2>
+            <p>Built on trust, strengthened through generations, and driven by operational excellence.</p>
+        </div>
+    </section>
+
+    <!-- Services Preview -->
+    <section id="services" class="services bg-light">
+        <div class="container text-center">
+            <h2 class="fade-up">Our Services</h2>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services loaded dynamically -->
+            </div>
+            <a href="services.html" class="btn btn-primary mt-4 fade-up">View All Services</a>
+        </div>
+    </section>
+
+    <!-- Industries We Serve -->
+    <section class="industries">
+        <div class="container text-center">
+            <h2 class="fade-up">Industries We Serve</h2>
+            <div class="industries-grid mt-4" id="industriesGrid">
+                <!-- Industries loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why-us" class="fleet bg-light">
+        <div class="container text-center">
+            <h2 class="fade-up">Why Choose Us</h2>
+            <p class="fade-up mt-2" style="max-width: 600px; margin: 0 auto; color: var(--text-dark);">
+                Over three generations of specialized logistics handling, absolute safety compliance, and massive freight capability. We combine modern fleet operations with unparalleled industry reliability.
+            </p>
+            <div class="fleet-gallery mt-4">
+                <div class="fleet-item fade-up">
+                    <img src="https://loremflickr.com/800/600/scania,truck?lock=21" alt="Heavy Trucks">
+                    <div class="fleet-overlay"><h3>Premium Safety</h3></div>
+                </div>
+                <div class="fleet-item fade-up delay-1">
+                    <img src="https://loremflickr.com/800/600/tankertruck?lock=22" alt="Tankers">
+                    <div class="fleet-overlay"><h3>Liquid Logistics</h3></div>
+                </div>
+                <div class="fleet-item fade-up delay-2">
+                    <img src="https://loremflickr.com/800/600/bulk,carrier?lock=23" alt="Bulk Carriers">
+                    <div class="fleet-overlay"><h3>Massive Capacity</h3></div>
+                </div>
+                <div class="fleet-item fade-up">
+                    <img src="https://loremflickr.com/800/600/excavator,mining?lock=24" alt="Mining Fleet">
+                    <div class="fleet-overlay"><h3>Heavy Machinery</h3></div>
+                </div>
+                <div class="fleet-item fade-up delay-1">
+                    <img src="https://loremflickr.com/800/600/container,truck?lock=25" alt="Container Trucks">
+                    <div class="fleet-overlay"><h3>Reliable Logistics</h3></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Working Process Timeline -->
+    <section class="process">
+        <div class="container text-center">
+            <h2 class="fade-up">Our Working Process</h2>
+            <div class="timeline mt-4">
+                <div class="timeline-step fade-up">
+                    <div class="step-icon"><i class="fa-solid fa-comments"></i></div>
+                    <h4>Inquiry</h4>
+                </div>
+                <div class="timeline-connector fade-up"></div>
+                <div class="timeline-step fade-up delay-1">
+                    <div class="step-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                    <h4>Planning</h4>
+                </div>
+                <div class="timeline-connector fade-up delay-1"></div>
+                <div class="timeline-step fade-up delay-2">
+                    <div class="step-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h4>Fleet Allocation</h4>
+                </div>
+                <div class="timeline-connector fade-up delay-2"></div>
+                <div class="timeline-step fade-up delay-3">
+                    <div class="step-icon"><i class="fa-solid fa-route"></i></div>
+                    <h4>Transportation</h4>
+                </div>
+                <div class="timeline-connector fade-up delay-3"></div>
+                <div class="timeline-step fade-up delay-4">
+                    <div class="step-icon"><i class="fa-solid fa-check-double"></i></div>
+                    <h4>Safe Delivery</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-us bg-light">
+        <div class="container split-layout">
+            <div class="choose-image fade-up">
+                <img src="https://loremflickr.com/1200/800/industrial,fleet" alt="Modern Fleet Operations">
+            </div>
+            <div class="choose-content fade-up delay-1">
+                <h2>Why Choose Us</h2>
+                <ul class="checklist">
+                    <li><i class="fa-solid fa-check"></i> Modern Fleet</li>
+                    <li><i class="fa-solid fa-check"></i> Industry Expertise</li>
+                    <li><i class="fa-solid fa-check"></i> Strict Safety Standards</li>
+                    <li><i class="fa-solid fa-check"></i> Government Compliance</li>
+                    <li><i class="fa-solid fa-check"></i> Timely Delivery</li>
+                    <li><i class="fa-solid fa-check"></i> Pan India Operations</li>
+                    <li><i class="fa-solid fa-check"></i> 24×7 Support</li>
+                </ul>
+                <a href="about.html" class="btn btn-primary mt-3">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Preview -->
+    <section id="leadership" class="leadership">
+        <div class="container text-center">
+            <h2 class="fade-up">Leadership</h2>
+            <div class="leadership-grid mt-4" id="leadershipGrid">
+                <!-- Leadership profiles loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Logos Carousel -->
+    <section class="clients bg-light">
+        <div class="container text-center fade-up">
+            <h2>Our Trusted Clients</h2>
+            <div class="client-logos-wrapper mt-4">
+                <div class="client-logos" id="clientLogosContainer">
+                    <!-- Client logos loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="quote" class="cta">
+        <div class="container text-center fade-up">
+            <h2>Need Reliable Industrial Logistics?</h2>
+            <p>Let's discuss your transportation requirements and deliver operational excellence.</p>
+            <a href="contact.html" class="btn btn-primary mt-3">Get a Quote</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Company</h3>
+                <p>Noori Transportation Co.</p>
+                <p class="tagline">3 Generations. One Business.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="fleet.html">Fleet / Gallery</a></li>
+                    <li><a href="leadership.html">Leadership</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html">Coal Mining</a></li>
+                    <li><a href="services.html">Bulk Cargo Logistics</a></li>
+                    <li><a href="services.html">Hazardous Material</a></li>
+                    <li><a href="services.html">Fuel Logistics</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fa-solid fa-location-dot"></i> 123 Industrial Hub, Metro City</li>
+                    <li><i class="fa-solid fa-envelope"></i> contact@nooritransport.com</li>
+                    <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+                </ul>
+                <div class="social-icons mt-3">
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Noori Transportation Co. All Rights Reserved. | <a href="admin.html" style="color: var(--red); font-weight: 600;">Admin Portal</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=1.2"></script>
+</body>
+</html>
