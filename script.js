@@ -135,7 +135,7 @@ const defaultData = {
         { id: "serv-3", icon: "fa-solid fa-boxes-stacked", title: "Bulk Cargo Logistics", desc: "Comprehensive supply chain handling for non-hazardous industrial bulk goods, raw materials, and mineral processing logistics.", image: "https://loremflickr.com/800/600/cargo,truck?lock=33" },
         { id: "serv-4", icon: "fa-solid fa-skull-crossbones", title: "Hazardous Material Transport", desc: "Strictly certified and regulated transit of sensitive chemical raw materials, hazardous liquids, and specialized industrial gasses.", image: "https://loremflickr.com/800/600/chemical,tanker?lock=4" },
         { id: "serv-5", icon: "fa-solid fa-dumpster", title: "Industrial Waste Transportation", desc: "Compliant and safe transit of chemical byproducts, toxic manufacturing residue, and heavy industrial waste to treatment sites.", image: "https://loremflickr.com/800/600/garbage,truck?lock=5" },
-        { id: "serv-6", icon: "fa-solid fa-gas-pump", title: "Fuel Logistics", desc: "High-safety transport of petroleum products, diesel supplies, and industrial liquid fuels utilizing specialized tankers.", image: "https://loremflickr.com/800/600/fuel,tanker?lock=6" },
+        { id: "serv-6", icon: "fa-solid fa-gas-pump", title: "Fuel Logistics", desc: "High-safety transport of petroleum products, diesel supplies, and industrial liquid fuels utilizing specialized tankers.", image: "https://loremflickr.com/800/600/fuel,truck?lock=66" },
         { id: "serv-7", icon: "fa-solid fa-leaf", title: "Hydrogen & Clean Energy Logistics", desc: "Innovative transit solutions for compressed hydrogen gas, liquefied clean fuels, and renewable energy infrastructure equipment.", image: "https://loremflickr.com/800/600/eco,truck?lock=7" },
         { id: "serv-8", icon: "fa-solid fa-route", title: "Supply Chain Solutions", desc: "Integrated logistics optimization, route planning, warehousing coordination, and multi-modal freight forwarding networks.", image: "https://loremflickr.com/800/600/warehouse,forklift?lock=8" },
         { id: "serv-9", icon: "fa-solid fa-gears", title: "Customized Logistics Services", desc: "Tailored commercial contracts, emergency freight allocations, and project-specific heavy-haul transport tasks.", image: "https://loremflickr.com/800/600/heavy,machine?lock=9" }
@@ -206,6 +206,13 @@ function initDynamicData() {
         const bulkService = websiteData.services.find(s => s.id === 'serv-3');
         if (bulkService && bulkService.image === 'https://loremflickr.com/800/600/freight,shipping?lock=3') {
             bulkService.image = 'https://loremflickr.com/800/600/cargo,truck?lock=33';
+            needsUpdate = true;
+        }
+        
+        // Fix for the airplane image in Fuel Logistics
+        const fuelService = websiteData.services.find(s => s.id === 'serv-6');
+        if (fuelService && fuelService.image === 'https://loremflickr.com/800/600/fuel,tanker?lock=6') {
+            fuelService.image = 'https://loremflickr.com/800/600/fuel,truck?lock=66';
             needsUpdate = true;
         }
     }
