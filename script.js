@@ -351,20 +351,12 @@ function applyWebsiteData(data) {
 function initClientsCarousel(clientCount) {
     const track = document.getElementById('clientLogosContainer');
     const wrapper = document.querySelector('.client-logos-wrapper');
-    if (!track || !wrapper || clientCount <= 5) {
-        if (track) track.style.transform = 'translateX(0)';
-        return;
-    }
+    if (!track || !wrapper) return;
 
     // Cancel any existing animation frame to prevent doubling speeds
     if (window.clientCarouselAnimationId) {
         cancelAnimationFrame(window.clientCarouselAnimationId);
     }
-
-    // Setup wrapper and track styling
-    wrapper.style.overflow = 'hidden';
-    wrapper.style.width = '100%';
-    wrapper.style.position = 'relative';
 
     track.style.display = 'flex';
     track.style.flexWrap = 'nowrap';
@@ -388,9 +380,14 @@ function initClientsCarousel(clientCount) {
         const clone = child.cloneNode(true);
         track.appendChild(clone);
     });
+    // Add a second clone set so the loop is long enough on wide screens
+    originalChildren.forEach(child => {
+        const clone = child.cloneNode(true);
+        track.appendChild(clone);
+    });
 
     let currentX = 0;
-    const speed = 0.8; // Smooth slow scroll
+    const speed = 0.6; // Smooth slow scroll
 
     function step() {
         currentX -= speed;
@@ -404,8 +401,13 @@ function initClientsCarousel(clientCount) {
 
     // Delay measurement until DOM finishes layout flow
     setTimeout(() => {
+        // Recompute after layout
+        originalWidth = 0;
+        originalChildren.forEach(child => {
+            originalWidth += child.getBoundingClientRect().width + gap;
+        });
         window.clientCarouselAnimationId = requestAnimationFrame(step);
-    }, 150);
+    }, 200);
 }
 
 
