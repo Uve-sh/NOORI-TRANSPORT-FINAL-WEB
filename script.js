@@ -132,7 +132,7 @@ const defaultData = {
     services: [
         { id: "serv-1", icon: "fa-solid fa-mountain", title: "Mining Logistics", desc: "End-to-end extraction support, heavy earthmoving equipment deployment, and safe mineral transport logistics from mine pit to processing hubs.", image: "https://loremflickr.com/800/600/excavator,mine?lock=1" },
         { id: "serv-2", icon: "fa-solid fa-truck-moving", title: "Coal Transportation", desc: "High-volume, compliant coal transit via heavy-duty tippers and bulk carriers from mines to thermal power plants and steel mills.", image: "https://loremflickr.com/800/600/coal,truck?lock=2" },
-        { id: "serv-3", icon: "fa-solid fa-boxes-stacked", title: "Bulk Cargo Logistics", desc: "Comprehensive supply chain handling for non-hazardous industrial bulk goods, raw materials, and mineral processing logistics.", image: "https://loremflickr.com/800/600/freight,shipping?lock=3" },
+        { id: "serv-3", icon: "fa-solid fa-boxes-stacked", title: "Bulk Cargo Logistics", desc: "Comprehensive supply chain handling for non-hazardous industrial bulk goods, raw materials, and mineral processing logistics.", image: "https://loremflickr.com/800/600/cargo,truck?lock=33" },
         { id: "serv-4", icon: "fa-solid fa-skull-crossbones", title: "Hazardous Material Transport", desc: "Strictly certified and regulated transit of sensitive chemical raw materials, hazardous liquids, and specialized industrial gasses.", image: "https://loremflickr.com/800/600/chemical,tanker?lock=4" },
         { id: "serv-5", icon: "fa-solid fa-dumpster", title: "Industrial Waste Transportation", desc: "Compliant and safe transit of chemical byproducts, toxic manufacturing residue, and heavy industrial waste to treatment sites.", image: "https://loremflickr.com/800/600/garbage,truck?lock=5" },
         { id: "serv-6", icon: "fa-solid fa-gas-pump", title: "Fuel Logistics", desc: "High-safety transport of petroleum products, diesel supplies, and industrial liquid fuels utilizing specialized tankers.", image: "https://loremflickr.com/800/600/fuel,tanker?lock=6" },
@@ -201,6 +201,15 @@ function initDynamicData() {
         websiteData.industries = defaultData.industries;
         needsUpdate = true;
     }
+    // Fix for the airplane image in Bulk Cargo Logistics
+    if (websiteData.services) {
+        const bulkService = websiteData.services.find(s => s.id === 'serv-3');
+        if (bulkService && bulkService.image === 'https://loremflickr.com/800/600/freight,shipping?lock=3') {
+            bulkService.image = 'https://loremflickr.com/800/600/cargo,truck?lock=33';
+            needsUpdate = true;
+        }
+    }
+    
     if (needsUpdate) {
         localStorage.setItem('noori_website_data', JSON.stringify(websiteData));
     }
