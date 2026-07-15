@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=1.2">
+    <link rel="stylesheet" href="styles.css?v=1.4">
     
     <style>
         /* Subpage-specific styling */
@@ -356,6 +356,7 @@
             .about-layout-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+                padding: 3rem 0;
             }
             .about-sidebar {
                 position: relative;
@@ -367,6 +368,35 @@
             }
             .about-contact-grid {
                 grid-template-columns: 1fr;
+            }
+            .vision-grid {
+                grid-template-columns: 1fr;
+            }
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            .subpage-hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .vision-card {
+                padding: 1.5rem;
+            }
+            .contact-details-box {
+                padding: 1.5rem;
+            }
+            .sidebar-menu-item {
+                font-size: 0.9rem;
+                padding: 10px;
+                flex: 1 1 auto;
+                justify-content: center;
+                text-align: center;
             }
         }
     </style>
@@ -704,7 +734,7 @@
             showTab(initialTab);
         });
     </script>
-    <script src="script.js?v=1.2"></script>
+    <script src="script.js?v=1.4"></script>
 
 </body>
 </html>
